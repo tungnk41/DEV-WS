@@ -1,42 +1,45 @@
-def count_xmas_occurrences(grid):
-    rows = len(grid)
-    if rows == 0:
-        return 0
-    cols = len(grid[0])
 
-    directions = [
-        (0, 1),  # Right
-        (0, -1),  # Left
-        (1, 0),  # Down
-        (-1, 0),  # Up
-        (1, 1),  # Down-Right
-        (1, -1),  # Down-Left
-        (-1, 1),  # Up-Right
-        (-1, -1),  # Up-Left
-    ]
+from collections import defaultdict
 
+def part_1(r, c, grid):
+    dirs = [[-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [-1, 1], [1, -1], [1, 1]]
+    word = "XMAS"
     count = 0
-
-    for i in range(rows):
-        for j in range(cols):
-            for di, dj in directions:
-                i3 = i + 3 * di
-                j3 = j + 3 * dj
-                if 0 <= i3 < rows and 0 <= j3 < cols:
-                    # Check for "XMAS"
-                    if (
-                        grid[i][j] == "X"
-                        and grid[i + di][j + dj] == "M"
-                        and grid[i + 2 * di][j + 2 * dj] == "A"
-                        and grid[i + 3 * di][j + 3 * dj] == "S"
-                    ):
-                        count += 1
+    for dir in dirs:
+        match_idx = 0
+        for idx in range(len(word)):
+            x = r + idx * dir[0]
+            y = c + idx * dir[1]
+            if ((0 <= x < len(grid)) and (0 <= y < len(grid[0]))) and (
+                grid[x][y] == word[idx]
+            ):
+                match_idx += 1
+        if match_idx == len(word):
+            count += 1
     return count
+
+def part_2(r,c, grid):
+    dirs = [ [-1, -1], [-1, 1],[1, -1], [1, 1]]
+    m = defaultdict(int)
+    for dir in dirs:
+        x = r + dir[0]
+        y = c + dir[1]
+        if ((0 <= x < len(grid)) and (0 <= y < len(grid[0]))):
+            m[grid[x][y]] += 1
+        else: return 0
+    if (m['S'] == 2 and m['M'] == 2) and (grid[r-1][c-1] != grid[r+1][c+1]):
+        return 1
+    return 0
 
 
 # Read the input file
 filepath = "AoC_2024\\Day4\\input.txt"
 with open(filepath, "r", encoding="utf-8") as file:
     grid = [line.strip() for line in file.readlines()]
-
-print(count_xmas_occurrences(grid))
+    count = 0
+    for r in range(len(grid)):
+        for c in range(len(grid[0])):
+            # count += part_1(r, c, grid)
+            if (grid[r][c] == 'A'):
+                count += part_2(r,c,grid)
+    print(count)
