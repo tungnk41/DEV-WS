@@ -1,9 +1,10 @@
 from collections import defaultdict
+import pathlib
 
-
+file_path = pathlib.Path(__file__).parent.resolve().joinpath("input.txt")
 def input():
-    filepath = "AoC_2024\\Day1\\input.txt"
-    with open(filepath, "r", encoding="utf-8") as file:
+    
+    with open(file_path, "r", encoding="utf-8") as file:
         data = file.readlines()
         for line in data:
             a, b = map(int, line.strip().split())

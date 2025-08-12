@@ -1,11 +1,11 @@
 from collections import defaultdict
+import pathlib
 
-
+file_path = pathlib.Path(__file__).parent.resolve().joinpath("input.txt")
 # part 1
-filepath = "AoC_2024\\Day2\\input.txt"
 data = [[]]
 ans = 0
-with open(filepath, "r", encoding="utf-8") as file:
+with open(file_path, "r", encoding="utf-8") as file:
     data = [list(map(int, line.strip().split())) for line in file]
 
 

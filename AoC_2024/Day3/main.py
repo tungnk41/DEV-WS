@@ -1,7 +1,8 @@
 import re
+import pathlib
 
-filepath = "AoC_2024\\Day3\\input.txt"
-with open(filepath, "r", encoding="utf-8") as file:
+file_path = pathlib.Path(__file__).parent.resolve().joinpath("input.txt")
+with open(file_path, "r", encoding="utf-8") as file:
     pattern = re.compile(r"mul\((\d{1,3}),(\d{1,3})\)|don't\(\)|do\(\)")
     matches = list(pattern.finditer(file.read()))
     isActive = True

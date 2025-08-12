@@ -1,6 +1,8 @@
 
 from collections import defaultdict
+import pathlib
 
+file_path = pathlib.Path(__file__).parent.resolve().joinpath("input.txt")
 def part_1(r, c, grid):
     dirs = [[-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [-1, 1], [1, -1], [1, 1]]
     word = "XMAS"
@@ -33,8 +35,7 @@ def part_2(r,c, grid):
 
 
 # Read the input file
-filepath = "AoC_2024\\Day4\\input.txt"
-with open(filepath, "r", encoding="utf-8") as file:
+with open(file_path, "r", encoding="utf-8") as file:
     grid = [line.strip() for line in file.readlines()]
     count = 0
     for r in range(len(grid)):
