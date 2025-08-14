@@ -8,7 +8,6 @@ block_1 = []
 block_2 = []
 m = defaultdict(list)
 
-
 def init():
     global block_1, block_2, m
     file_path = pathlib.Path(__file__).parent.resolve().joinpath("input.txt")
@@ -34,24 +33,22 @@ def init():
         # print(block_1)
         # print(block_2)
 
-
 def verify(lst):
     prev = None
-    isBreak = False
+    is_break = False
     for element in lst:
         current = element if element in m else None
-        if current == None:
-            isBreak = True
+        if current is None:
+            is_break = True
             break
-        if prev == None:  # first index
+        if prev is None:  # first index
             prev = current
         else:
             if current in m[prev]:
                 prev = current
             else:
-                isBreak = True
-    return not isBreak
-
+                is_break = True
+    return not is_break
 
 def part_1():
     list_ans = []
@@ -63,7 +60,6 @@ def part_1():
         idx_med = len(lst) // 2
         ans += lst[idx_med]
     print(ans)
-
 
 def part_2():
     list_ans = []
@@ -79,7 +75,6 @@ def part_2():
         idx_med = len(lst) // 2
         ans += lst[idx_med]
     print(ans)
-
 
 init()
 # part_1()
